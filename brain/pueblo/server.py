@@ -26,7 +26,7 @@ from . import voice as voicemod
 from .config import Config, LLMConfig
 from .llm import OllamaClient
 from .runner import SimRunner
-from .scenarios import build_village
+from .scenarios import HOST_ID, PARTY_FACT, build_village
 from .simulation import Simulation
 from .world import Clock, World
 
@@ -43,13 +43,17 @@ hub = Hub()
 
 def build_runner(
     n_agents: int = 5, model: str | None = None, seed: int = 0,
-    max_ticks: int | None = None, speed: float = 2.0,
+    max_ticks: int | None = None, speed: float = 2.0, seed_party: bool = True,
 ) -> SimRunner:
     cfg = Config(llm=LLMConfig(chat_model=model)) if model else Config()
     sim = Simulation(world=World(clock=Clock(cfg.time)), llm=OllamaClient(cfg.llm), cfg=cfg, seed=seed)
     build_village(sim, n_agents)
     sim.on_event = hub.event_q.put  # thread-safe sink
-    return SimRunner(sim, max_ticks=max_ticks, speed=speed)
+    return SimRunner(
+        sim, max_ticks=max_ticks, speed=speed,
+        seed_agent=HOST_ID if seed_party else None,
+        seed_text=PARTY_FACT if seed_party else None,
+    )
 
 
 def _drain_one(q: queue.Queue):
@@ -78,7 +82,10 @@ async def lifespan(app: FastAPI):
     n = int(os.environ.get("PUEBLO_AGENTS", "5"))
     model = os.environ.get("PUEBLO_CHAT_MODEL") or None
     mt = os.environ.get("PUEBLO_MAX_TICKS")
-    hub.runner = build_runner(n_agents=n, model=model, max_ticks=int(mt) if mt else None)
+    seed_party = os.environ.get("PUEBLO_SEED_PARTY", "1") != "0"
+    hub.runner = build_runner(
+        n_agents=n, model=model, max_ticks=int(mt) if mt else None, seed_party=seed_party
+    )
     hub.runner.start()
     pump = asyncio.create_task(_pump())
     try:

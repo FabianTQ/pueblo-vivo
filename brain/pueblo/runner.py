@@ -18,10 +18,19 @@ from .simulation import Simulation
 
 
 class SimRunner:
-    def __init__(self, sim: Simulation, max_ticks: int | None = None, speed: float = 2.0):
+    def __init__(
+        self,
+        sim: Simulation,
+        max_ticks: int | None = None,
+        speed: float = 2.0,
+        seed_agent: str | None = None,
+        seed_text: str | None = None,
+    ):
         self.sim = sim
         self.max_ticks = max_ticks
         self.speed = speed  # ticks per real second while running
+        self.seed_agent = seed_agent  # optionally seed a fact into one agent on start
+        self.seed_text = seed_text
         self.paused = True
         self._stop = False
         self._lock = threading.Lock()
@@ -57,6 +66,8 @@ class SimRunner:
     def plan_day(self) -> None:
         if not self._planned:
             self.sim.plan_day()
+            if self.seed_agent and self.seed_text and self.seed_agent in self.sim.agents:
+                self.sim.seed_fact(self.seed_agent, self.seed_text)
             self._planned = True
 
     # -- controls ----------------------------------------------------------
