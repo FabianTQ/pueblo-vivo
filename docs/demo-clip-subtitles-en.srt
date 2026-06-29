@@ -1,0 +1,81 @@
+1
+00:00:00,000 --> 00:00:03,500
+These characters have no scripted dialogue.
+
+2
+00:00:03,500 --> 00:00:07,000
+They talk, remember and change plans in real time —
+driven by AI running on my own laptop.
+
+3
+00:00:07,000 --> 00:00:11,500
+Ordinary game NPCs repeat the same lines on a loop.
+
+4
+00:00:11,500 --> 00:00:15,500
+Here, every villager has memory,
+a personality, and an agenda of their own.
+
+5
+00:00:15,500 --> 00:00:20,000
+A reimagining of Stanford's Generative Agents —
+but fully offline, on an RTX 4060.
+
+6
+00:00:20,000 --> 00:00:25,000
+I tell just one villager there's a party
+at the plaza tonight.
+
+7
+00:00:25,000 --> 00:00:30,000
+No one else.
+
+8
+00:00:30,000 --> 00:00:35,000
+And then word starts to spread.
+
+9
+00:00:35,000 --> 00:00:40,500
+Diego hears it from Maria,
+and passes it on to Sofia.
+
+10
+00:00:40,500 --> 00:00:45,500
+Sofia tells Carlos.
+
+11
+00:00:45,500 --> 00:00:52,000
+Nobody coded that chain —
+it emerges from their conversations.
+
+12
+00:00:52,000 --> 00:00:57,000
+By evening, the ones who heard
+show up at the plaza — right on time.
+
+13
+00:00:57,000 --> 00:01:02,000
+Five of five knew it;
+four learned it by word of mouth.
+
+14
+00:01:02,000 --> 00:01:08,000
+Under the hood: a Python brain —
+
+15
+00:01:08,000 --> 00:01:14,000
+memory, relevance-based retrieval,
+reflection, and planning.
+
+16
+00:01:14,000 --> 00:01:20,000
+It talks to Unity over WebSocket,
+turn-based so a single GPU can run it.
+
+17
+00:01:20,000 --> 00:01:24,000
+No cloud. No APIs. No per-token cost.
+
+18
+00:01:24,000 --> 00:01:28,000
+Just my GPU — and a village that comes alive.
