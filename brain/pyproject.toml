@@ -1,0 +1,14 @@
+[project]
+name = "pueblo"
+version = "0.1.0"
+description = "Pueblo Vivo — local generative-agents village brain"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "live: tests that require a running Ollama server with models pulled",
+]
+addopts = "-q -m 'not live'"

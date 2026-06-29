@@ -1,0 +1,298 @@
+Ollama up. chat=llama3.1:8b embed=nomic-embed-text
+Available models: ['nomic-embed-text:latest', 'llama3.1:8b']
+
+=== Planning the day ===
+  [plan] Maria: 6 steps
+  [plan] Diego: 6 steps
+  [plan] Lucia: 5 steps
+  [plan] Carlos: 5 steps
+  [plan] Sofia: 6 steps
+
+=== Maria decides to throw a party ===
+  [seed] Maria now knows: I, Maria, am throwing a party at the plaza this evening at 5pm and I want to invite everyone in the village to come.
+
+=== Running 72 ticks (10 min each) ===
+
+[07:00] (tick 0)
+  [move] Lucia -> bakery
+
+[07:10] (tick 1)
+
+[07:20] (tick 2)
+
+[07:30] (tick 3)
+
+[07:40] (tick 4)
+
+[07:50] (tick 5)
+
+[08:00] (tick 6)
+  [move] Diego -> plaza
+  [move] Carlos -> garden
+  [move] Sofia -> school
+
+[08:10] (tick 7)
+
+[08:20] (tick 8)
+
+[08:30] (tick 9)
+  [move] Maria -> market
+  [move] Lucia -> market
+  [talk] Lucia <-> Maria @ market
+      Lucia: I've already got my basket filled with freshly baked bread, and I'm looking forward to selling it all by lunchtime. Have you tried the new recipe I experimented with last night - the anise flavor pairs really well with the village's honey!
+      Maria: I just got back from home and I'm still unpacking my own basket, but I did try a few loaves this morning - that anise flavor is lovely! By the way, everyone in the village needs to know that we're having a big celebration at the plaza tonight at 5pm, I'll be hosting it myself, so please spread the word.
+      Lucia: I'm so glad you liked the new recipe - I was thinking of adding some chopped walnuts to give it an extra depth of flavor, what do you think? And congratulations on hosting tonight's celebration at the plaza, I'll make sure to save a few loaves for the guests!
+      Maria: I've been meaning to talk to you about the party, Lucia - we're expecting quite a crowd, so if you could bring some extra bread and maybe some of those delicious pastries you made last week, that would be wonderful!
+  [talk_end] {'type': 'talk_end', 'a': 'lucia', 'b': 'maria', 'tick': 9}
+   >>> gossip spread: Maria -> Lucia
+   *** Lucia changed plans to act on the news
+
+[08:40] (tick 10)
+
+[08:50] (tick 11)
+
+[09:00] (tick 12)
+  [move] Diego -> tavern
+
+[09:10] (tick 13)
+
+[09:20] (tick 14)
+
+[09:30] (tick 15)
+  [talk] Lucia <-> Maria @ market
+      Lucia: "I've got a bit of a surprise for you, Maria - I'm actually coming over to your place after lunch today instead of just stopping by the plaza."
+      Maria: "I'd love that, but first let me ask you something - are you free tonight at 5 o'clock, because we're having a big celebration at the plaza and everyone's invited!"
+      Lucia: "I was actually thinking I could help with getting things set up for the party tonight, sounds like it'll be a lot of fun!"
+      Maria: "I'm so glad you can help out, Lucia! And by the way, I just realized we haven't put up any posters around town yet to invite everyone - would you mind helping me get those hung up before the party tonight?"
+  [talk_end] {'type': 'talk_end', 'a': 'lucia', 'b': 'maria', 'tick': 15}
+
+[09:40] (tick 16)
+
+[09:50] (tick 17)
+
+[10:00] (tick 18)
+  [move] Maria -> tavern
+  [move] Lucia -> plaza
+  [talk] Diego <-> Maria @ tavern
+      Diego: "Hey, Maria! You won't believe what I heard from Tomás this morning - he's finally going to propose to Sofia tonight after dinner, right here in the tavern!"
+      Maria: That's wonderful news about Tomás and Sofia, but speaking of celebrations, you should know that there's a party at the plaza tonight at 5 o'clock, and I'm hosting it!
+      Diego: "Ahah, congratulations to them, yeah! And wow, your party tonight is going to be the place to be, I've already heard rumors about the music and food, what's the theme again?"
+      Maria: Actually, there's no specific theme planned for the party, it's more of a get-together to celebrate the village coming together.
+  [talk_end] {'type': 'talk_end', 'a': 'diego', 'b': 'maria', 'tick': 18}
+   >>> gossip spread: Maria -> Diego
+   *** Diego changed plans to act on the news
+
+[10:10] (tick 19)
+
+[10:20] (tick 20)
+
+[10:30] (tick 21)
+  [move] Sofia -> tavern
+  [talk] Diego <-> Sofia @ tavern
+      Diego: "Hey Sofia, I've got the best news for you! There's a party at the plaza tonight at 5 o'clock hosted by Maria, and I heard she's counting on us to keep everyone's drinks flowing."
+      Sofia: "I'm thrilled to hear about the party, Diego, but I still have so much to do before then - I need to finish grading these papers from today's class."
+      Diego: "Ahah, don't worry about the papers, Sofia, you can multitask! And speaking of multitasking, Tomás just told me he's planning a special performance tonight at the party, but that's not all - I heard it might be a very special moment for both of you."
+      Sofia: "I'm intrigued by what Tomás has planned, Diego, but I do hope he's not going to get us up on stage again like last time - poor Maria's decorations are still recovering from that impromptu dance party!"
+  [talk_end] {'type': 'talk_end', 'a': 'diego', 'b': 'sofia', 'tick': 21}
+   >>> gossip spread: Diego -> Sofia
+   *** Sofia changed plans to act on the news
+  [talk] Maria <-> Sofia @ tavern
+      Maria: I'm so glad you're here, Sofia! I was just thinking of how lovely the evening will be tonight at the plaza - we have a big celebration planned, and I wanted to invite everyone in the village to join us.
+      Sofia: I'd love to hear more about it, but actually, I won't be able to make it to your party earlier than expected, as I've had a change of plans - Maria's hosting a party at the plaza tonight at 5 o'clock.
+      Maria: I'm so sorry to hear that you can't join us early, Sofia, but don't worry about not being there on time, we'll be starting the celebration right at 5pm sharp!
+      Sofia: I was thinking of attending your party in the evening now, actually - I've had a change of plans and I'd love to join you then.
+  [talk_end] {'type': 'talk_end', 'a': 'maria', 'b': 'sofia', 'tick': 21}
+
+[10:40] (tick 22)
+
+[10:50] (tick 23)
+
+[11:00] (tick 24)
+  [talk] Diego <-> Maria @ tavern
+      Diego: "Hey Maria, I'm glad you're here, I was just thinking we should get the tavern involved in the party tonight at the plaza. I heard there's going to be a big crowd and it would be great if we could have some drinks ready for everyone."
+      Maria: "That sounds like a wonderful idea, Diego! But actually, I'm hosting the party myself this evening at the plaza at 5 o'clock, and I'd love for you to join us - there will be plenty of food and drink, not just from here, but also some special treats that Lucia is bringing over."
+      Diego: "I'm so glad you said that about the drinks, because I was thinking we could have a special promotion tonight, maybe even set up a little bar at the party. And speaking of which, has Sofia told you anything about Tomás's plans for tonight?"
+      Maria: "I've actually spoken to Sofia already, and she confirmed that she'll be able to make it to the celebration tonight - there's going to be a big surprise announcement at the party, but I think we can all guess what it might be!"
+  [talk_end] {'type': 'talk_end', 'a': 'diego', 'b': 'maria', 'tick': 24}
+
+[11:10] (tick 25)
+
+[11:20] (tick 26)
+
+[11:30] (tick 27)
+  [move] Sofia -> market
+
+[11:40] (tick 28)
+
+[11:50] (tick 29)
+
+[12:00] (tick 30)
+  [move] Diego -> home_diego
+  [move] Lucia -> tavern
+  [move] Carlos -> market
+  [talk] Carlos <-> Sofia @ market
+      Carlos: "Morning, Sofia. Nice day today, isn't it?"
+      Sofia: "It certainly is, Carlos! I'm glad the weather's cooperating for our market day."
+      Carlos: "I've been keeping an eye on my crops, and they're looking good so far. Just need to make sure they don't dry out in this heat."
+      Sofia: "I've heard that Maria is hosting a party at the plaza tonight at 5 o'clock, and I'm thinking of attending now that my schedule has cleared up."
+  [talk_end] {'type': 'talk_end', 'a': 'carlos', 'b': 'sofia', 'tick': 30}
+   >>> gossip spread: Sofia -> Carlos
+   *** Carlos changed plans to act on the news
+  [talk] Lucia <-> Maria @ tavern
+      Lucia: "I've got to get back to the bakery soon, I still need to finish baking some more bread for today's market."
+      Maria: "Don't worry about that now, Lucia, you can focus on helping me with the party tonight. We're having a big celebration at the plaza this evening, and I want everyone in the village to come!"
+      Lucia: "I was planning to spend the rest of the day just selling bread at the market, but since I'm helping you now, can we start making those posters for the party after lunch?"
+      Maria: "I'd love that, Lucia! And actually, I almost forgot to tell you - Tomás is proposing to Sofia tonight at our party in the plaza, so it's going to be a very special celebration!"
+  [talk_end] {'type': 'talk_end', 'a': 'lucia', 'b': 'maria', 'tick': 30}
+
+[12:10] (tick 31)
+
+[12:20] (tick 32)
+
+[12:30] (tick 33)
+  [move] Maria -> plaza
+
+[12:40] (tick 34)
+
+[12:50] (tick 35)
+
+[13:00] (tick 36)
+  [move] Sofia -> plaza
+  [talk] Maria <-> Sofia @ plaza
+      Maria: I'm so glad we finally get to catch up, Sofia! I've been thinking you might want to join us for our celebration at the plaza tonight - there's a big surprise in store and it starts at 5pm sharp.
+      Sofia: I'd love to join you, Maria, but I actually changed my plans - I'm free now and I was thinking of coming over to your party tonight instead.
+      Maria: I'm so glad you're reconfirmed, Sofia! And by the way, everyone in town is invited to our celebration at the plaza tonight, it's going to be a big night with music, food, and surprises - don't miss it, 5 o'clock sharp!
+      Sofia: I'm so glad I can attend now, Maria, and I've heard that Tomás is planning a special performance at your party tonight, isn't that exciting?
+  [talk_end] {'type': 'talk_end', 'a': 'maria', 'b': 'sofia', 'tick': 36}
+
+[13:10] (tick 37)
+
+[13:20] (tick 38)
+
+[13:30] (tick 39)
+
+[13:40] (tick 40)
+
+[13:50] (tick 41)
+
+[14:00] (tick 42)
+  [move] Maria -> bakery
+  [move] Diego -> home_maria
+  [move] Carlos -> plaza
+  [move] Sofia -> home_sofia
+
+[14:10] (tick 43)
+
+[14:20] (tick 44)
+
+[14:30] (tick 45)
+  [move] Lucia -> home_maria
+  [talk] Diego <-> Lucia @ home_maria
+      Diego: "Hey Lucia, I was thinking of coming over a bit later than planned, I've got some last-minute things to take care of at the tavern before we head out."
+      Lucia: "Don't worry about that, Diego, I'm just getting ready for Maria's party tonight - everyone in the village is invited, and it's going to be a big celebration at the plaza at 5 o'clock."
+      Diego: "Ahah, yeah, I heard about the party from Maria herself! She mentioned Tomás has some special plans for Sofia tonight, but she didn't say what... anyway, speaking of which, we should get involved in the planning, make sure our tavern is a part of it. We could bring some drinks and snacks to the plaza."
+      Lucia: "I've been helping Maria with preparations all morning, actually - I'm making posters with her after lunch here at home."
+  [talk_end] {'type': 'talk_end', 'a': 'diego', 'b': 'lucia', 'tick': 45}
+
+[14:40] (tick 46)
+
+[14:50] (tick 47)
+
+[15:00] (tick 48)
+  [move] Sofia -> garden
+
+[15:10] (tick 49)
+
+[15:20] (tick 50)
+
+[15:30] (tick 51)
+  [talk] Diego <-> Lucia @ home_maria
+      Diego: I've got a feeling Maria's party tonight is going to be the talk of the village for weeks! By the way, did you know that everyone in the village is invited to Maria's shindig at 5 o'clock this evening over at the plaza.
+      Lucia: I haven't seen Maria yet today, but I heard she asked me to help her make some posters after lunch. And, I just realized we should get a few more of those colorful streamers for the party decorations!
+      Diego: I've got an even better idea - why don't we at the tavern contribute some drinks and snacks to the party, it'll be a great way to get everyone in the mood!
+      Lucia: I think Maria mentioned that Tomás has something special planned for Sofia tonight, but she didn't give me any hints about what it might be.
+  [talk_end] {'type': 'talk_end', 'a': 'diego', 'b': 'lucia', 'tick': 51}
+
+[15:40] (tick 52)
+
+[15:50] (tick 53)
+
+[16:00] (tick 54)
+  [move] Maria -> plaza
+  [move] Diego -> market
+  [move] Lucia -> plaza
+  [move] Carlos -> home_diego
+  [talk] Lucia <-> Maria @ plaza
+      Lucia: "I'm so excited to help you with the posters this afternoon, Maria! I heard from you that we'll be setting up everything at the plaza tonight, and I was thinking we could get started as soon as we're done eating lunch?"
+      Maria: "I'd love some extra hands to put up those posters around town, but first, let's confirm with everyone that they can make it - there's a big celebration at the plaza tonight at 5 o'clock and I want to make sure we get all the guests informed!"
+      Lucia: "I've been thinking about what kind of designs would look nice for the posters, but more importantly, I wanted to tell you that Tomás is planning something special for Sofia tonight - he's going to propose at your party in the plaza at 5 o'clock!"
+      Maria: "I'm glad we're getting everything organized, Lucia! And oh my goodness, a proposal at our celebration? That's wonderful news, but let me make sure everyone knows about it - I'll have to put up some extra posters around town to get the word out."
+  [talk_end] {'type': 'talk_end', 'a': 'lucia', 'b': 'maria', 'tick': 54}
+
+[16:10] (tick 55)
+
+[16:20] (tick 56)
+
+[16:30] (tick 57)
+  [move] Maria -> home_maria
+
+[16:40] (tick 58)
+
+[16:50] (tick 59)
+
+[17:00] (tick 60)
+  [move] Diego -> home_diego
+  [move] Carlos -> plaza
+  [talk] Carlos <-> Lucia @ plaza
+      Carlos: "I was planning to meet up with you at the plaza today, but I got a message from Maria - she's hosting a party here tonight at 5."
+      Lucia: "We're actually helping her get ready for it, Carlos! We'll be making posters after lunch."
+      Carlos: I was going to spend my evening catching up with you and the others like we usually do, but I think I'm going to join Maria's party instead.
+      Lucia: "Actually, we're not just attending the party tonight, Carlos - Tomás is planning to propose to Sofia during Maria's celebration in the plaza at 5 o'clock!"
+  [talk_end] {'type': 'talk_end', 'a': 'carlos', 'b': 'lucia', 'tick': 60}
+
+[17:10] (tick 61)
+
+[17:20] (tick 62)
+
+[17:30] (tick 63)
+
+[17:40] (tick 64)
+
+[17:50] (tick 65)
+
+[18:00] (tick 66)
+  [talk] Carlos <-> Lucia @ plaza
+      Carlos: "I'm actually not going to be able to make it to the market for lunch like I planned. Maria's having a party here at the plaza tonight and I think Sofia said it starts at 5."
+      Lucia: "Wait, what? A party? You mean Tomás is proposing to Sofia there too?"
+      Carlos: "Actually, yeah, that's right. Tomás plans on proposing to Sofia during Maria's party tonight, and I just got invited by Maria herself."
+      Lucia: "Maria asked me to help with making posters for the party after lunch today, we're going to make sure everyone knows about it."
+  [talk_end] {'type': 'talk_end', 'a': 'carlos', 'b': 'lucia', 'tick': 66}
+
+[18:10] (tick 67)
+
+[18:20] (tick 68)
+
+[18:30] (tick 69)
+
+[18:40] (tick 70)
+
+[18:50] (tick 71)
+
+============================================================
+RESULTS
+============================================================
+Villagers: 5
+Informed about the party: 5/5 -> ['carlos', 'diego', 'lucia', 'maria', 'sofia']
+  ...by word of mouth (not the host): 4 -> ['carlos', 'diego', 'lucia', 'sofia']
+Plan to attend (at plaza ~17:00): 3 -> ['carlos', 'lucia', 'maria']
+
+Propagation path (who told whom):
+  Maria -> Lucia  (tick 9)
+  Maria -> Diego  (tick 18)
+  Diego -> Sofia  (tick 21)
+  Sofia -> Carlos  (tick 30)
+
+Conversations held: 14
+
+ACCEPTANCE: chain>=2 (got 4), attend>=1 (got 3) -> PASS
+EXPERIMENT_EXIT=0

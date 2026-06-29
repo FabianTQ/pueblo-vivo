@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Pueblo Vivo runtime
+brain/*.db
+brain/*.sqlite
+brain/runs/
+*.wav
+!assets/**/*.wav
+
+# Voice models (downloaded, heavy)
+brain/models/
+
+# Unity
+unity/[Ll]ibrary/
+unity/[Tt]emp/
+unity/[Oo]bj/
+unity/[Bb]uild/
+unity/[Bb]uilds/
+unity/[Ll]ogs/
+unity/[Uu]serSettings/
+unity/*.csproj
+unity/*.sln
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

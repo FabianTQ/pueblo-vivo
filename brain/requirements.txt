@@ -1,0 +1,14 @@
+# Core cognitive engine + server
+httpx>=0.27
+numpy>=1.26
+fastapi>=0.111
+uvicorn[standard]>=0.30
+websockets>=12.0
+
+# Tests
+pytest>=8.0
+pytest-asyncio>=0.23
+
+# Voice (added in F6; faster-whisper for STT, piper-tts for TTS)
+# faster-whisper>=1.0
+# piper-tts>=1.2
