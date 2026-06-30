@@ -121,3 +121,6 @@ All tunables live in `brain/pueblo/config.py` and can be overridden via env vars
 
 Inspired by Park et al., *Generative Agents* (2023). Built with Ollama, FastAPI and
 Unity 6.
+
+Character art: **KayKit "Adventurers"** by Kay Lousberg
+([CC0 1.0](https://kaylousberg.itch.io/kaykit-adventurers)).
