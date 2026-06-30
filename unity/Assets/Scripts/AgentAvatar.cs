@@ -21,7 +21,6 @@ namespace PuebloVivo
 
         private NavMeshAgent _nav;
         private Animator _anim;
-        private SpeechBubble _bubble;
         private Renderer[] _renderers;
         private MaterialPropertyBlock _mpb;
         private float _animSpeed;
@@ -61,7 +60,7 @@ namespace PuebloVivo
 
             if (tint.HasValue) avatar.ApplyColor(tint.Value);
 
-            avatar._bubble = SpeechBubble.Attach(go, BubbleHeight);
+            // name tag only — dialogue now shows in the DirectorUI subtitle bar
             var nameBubble = SpeechBubble.Attach(go, NameHeight);
             nameBubble.Show(displayName, float.MaxValue);
             return avatar;
@@ -82,7 +81,7 @@ namespace PuebloVivo
             else transform.position = pos;
         }
 
-        public void Say(string line) => _bubble?.Show(line);
+        public void Say(string line) { /* dialogue is shown in the HUD subtitle bar */ }
 
         public void Cheer()
         {

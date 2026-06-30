@@ -19,6 +19,7 @@ namespace PuebloVivo
         public event Action<int, string> OnClock;
         public event Action<JObject> OnMind;
         public event Action<string, string> OnGossip;
+        public event Action<string, string, string> OnDialogue;
 
         private readonly Dictionary<string, Vector3> _locPos = new();
         private readonly Dictionary<string, AgentAvatar> _agents = new();
@@ -111,9 +112,10 @@ namespace PuebloVivo
         {
             string id = (string)ev["agent"];
             string text = (string)ev["text"];
-            if (id != "player" && _agents.TryGetValue(id, out var avatar))
-                avatar.Say(text);
             string who = _agents.TryGetValue(id, out var a) ? a.DisplayName : id;
+            string toId = (string)ev["to"];
+            string to = _agents.TryGetValue(toId, out var b) ? b.DisplayName : toId;
+            OnDialogue?.Invoke(who, to, text);
             Log($"{who}: {text}");
         }
 

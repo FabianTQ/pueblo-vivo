@@ -22,6 +22,8 @@ namespace PuebloVivo
         private Vector2 _logScroll, _mindScroll;
         private string _injectText = "A traveling merchant just arrived with exotic goods.";
         private string _chatText = "";
+        private string _subtitle = "";
+        private float _subtitleUntil;
 
         private void Awake()
         {
@@ -37,6 +39,7 @@ namespace PuebloVivo
                 village.OnClock += OnClock;
                 village.OnLog += OnLog;
                 village.OnMind += OnMind;
+                village.OnDialogue += OnDialogue;
             }
             if (client != null)
             {
@@ -52,6 +55,7 @@ namespace PuebloVivo
                 village.OnClock -= OnClock;
                 village.OnLog -= OnLog;
                 village.OnMind -= OnMind;
+                village.OnDialogue -= OnDialogue;
             }
         }
 
@@ -66,6 +70,13 @@ namespace PuebloVivo
 
         private void OnMind(JObject mind) => _mind = mind;
 
+        private void OnDialogue(string speaker, string target, string text)
+        {
+            _subtitle = string.IsNullOrEmpty(target) || target == "player"
+                ? $"{speaker}: {text}" : $"{speaker} -> {target}: {text}";
+            _subtitleUntil = Time.time + 8f;
+        }
+
         private void OnGUI()
         {
             DrawTopBar();
@@ -74,6 +85,23 @@ namespace PuebloVivo
             DrawLog();
             DrawMind();
             DrawChat();
+            DrawSubtitle();
+        }
+
+        private void DrawSubtitle()
+        {
+            if (Time.time > _subtitleUntil || string.IsNullOrEmpty(_subtitle)) return;
+            // Sit to the RIGHT of the event log (x 10..370) so it never overlaps it.
+            float left = 380f;
+            float right = Screen.width - 20f;
+            float w = Mathf.Min(620f, right - left);
+            var rect = new Rect(left + (right - left - w) / 2f, Screen.height - 132, w, 56);
+            var prev = GUI.color;
+            GUI.color = new Color(1f, 1f, 1f, 0.9f);
+            GUILayout.BeginArea(rect, GUI.skin.box);
+            GUILayout.Label(_subtitle);
+            GUILayout.EndArea();
+            GUI.color = prev;
         }
 
         private void DrawTopBar()
