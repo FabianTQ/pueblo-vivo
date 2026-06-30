@@ -91,11 +91,12 @@ namespace PuebloVivo
         private void DrawSubtitle()
         {
             if (Time.time > _subtitleUntil || string.IsNullOrEmpty(_subtitle)) return;
-            // Sit to the RIGHT of the event log (x 10..370) so it never overlaps it.
+            // Sit right of the event log (x 10..370) and clear of the Mind panel
+            // (right side, ~Screen.width-360) when it's open, so it never overlaps a panel.
             float left = 380f;
-            float right = Screen.width - 20f;
-            float w = Mathf.Min(620f, right - left);
-            var rect = new Rect(left + (right - left - w) / 2f, Screen.height - 132, w, 56);
+            float right = (_mind != null ? Screen.width - 370f : Screen.width - 20f);
+            float w = Mathf.Max(200f, Mathf.Min(620f, right - left));
+            var rect = new Rect(left + Mathf.Max(0f, (right - left - w) / 2f), Screen.height - 132, w, 56);
             var prev = GUI.color;
             GUI.color = new Color(1f, 1f, 1f, 0.9f);
             GUILayout.BeginArea(rect, GUI.skin.box);

@@ -6,7 +6,7 @@ namespace PuebloVivo
     /// <summary>
     /// A villager's body in the 3D world. Instantiates a KayKit model prefab for the
     /// agent's role (falling back to a capsule if assets are missing), walks via
-    /// NavMesh, drives idle/walk animation from velocity, and shows speech bubbles.
+    /// NavMesh, drives idle/walk animation from velocity, and shows a floating name tag.
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
     public class AgentAvatar : MonoBehaviour
@@ -25,8 +25,7 @@ namespace PuebloVivo
         private MaterialPropertyBlock _mpb;
         private float _animSpeed;
 
-        // Heights tuned for the ~1.8u KayKit models (capsule fallback is 2u tall).
-        private const float BubbleHeight = 1.9f;
+        // Name-tag height tuned for the ~1.8u KayKit models (capsule fallback is 2u tall).
         private const float NameHeight = 2.3f;
 
         public static AgentAvatar Spawn(string model, string id, string displayName, Vector3 pos, Color? tint = null)
@@ -80,8 +79,6 @@ namespace PuebloVivo
             if (_nav != null && _nav.isOnNavMesh) _nav.SetDestination(pos);
             else transform.position = pos;
         }
-
-        public void Say(string line) { /* dialogue is shown in the HUD subtitle bar */ }
 
         public void Cheer()
         {
