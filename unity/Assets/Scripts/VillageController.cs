@@ -24,6 +24,8 @@ namespace PuebloVivo
         private readonly Dictionary<string, Vector3> _locPos = new();
         private readonly Dictionary<string, AgentAvatar> _agents = new();
         private readonly System.Random _rng = new(12345);
+        private const float BuildingScale = 2.5f; // hex buildings ship at miniature scale
+        private bool _decorated;
 
         private void Awake()
         {
@@ -97,6 +99,7 @@ namespace PuebloVivo
                 Vector3 pos = LocPos(loc) + Jitter();
                 _agents[id] = AgentAvatar.Spawn(model, id, name, pos);
             }
+            if (!_decorated) { EnvironmentDecorator.Decorate(transform, layoutRadius); _decorated = true; }
             Log($"world built: {agents.Count} villagers, {locs.Count} locations");
         }
 
@@ -127,13 +130,33 @@ namespace PuebloVivo
 
         private void CreateMarker(string name, Vector3 pos)
         {
-            var go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            go.name = $"Loc_{name}";
-            go.transform.position = pos + new Vector3(0, 0.05f, 0);
-            go.transform.localScale = new Vector3(3.5f, 0.1f, 3.5f);
-            go.GetComponent<Renderer>().material.color = new Color(0.6f, 0.6f, 0.62f);
-            Destroy(go.GetComponent<Collider>());
-            var label = SpeechBubble.Attach(go, 1.2f);
+            // holder stays unscaled so the floating label keeps a sane size/height
+            var holder = new GameObject($"Loc_{name}");
+            holder.transform.position = pos;
+            var model = EnvironmentCatalog.ModelFor(name);
+            GameObject building = null;
+            if (model != null)
+            {
+                var prefab = Resources.Load<GameObject>($"Environment/{model}");
+                if (prefab != null)
+                {
+                    building = Instantiate(prefab, holder.transform);
+                    building.transform.localPosition = Vector3.zero;
+                    building.transform.localRotation = Quaternion.Euler(0, _rng.Next(4) * 90, 0);
+                    building.transform.localScale = Vector3.one * BuildingScale;
+                }
+            }
+            if (building == null)
+            {
+                // fallback: the original gray disc so the scene still reads without art
+                building = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                building.transform.SetParent(holder.transform, false);
+                building.transform.localPosition = new Vector3(0, 0.05f, 0);
+                building.transform.localScale = new Vector3(3.5f, 0.1f, 3.5f);
+                building.GetComponent<Renderer>().material.color = new Color(0.6f, 0.6f, 0.62f);
+                Destroy(building.GetComponent<Collider>());
+            }
+            var label = SpeechBubble.Attach(holder, model != null ? 4.5f : 1.5f);
             label.Show(name, float.MaxValue);
         }
 

@@ -24,6 +24,9 @@ namespace PuebloVivo.EditorTools
             ground.name = "Ground";
             ground.transform.localScale = new Vector3(6, 1, 6);
             ground.isStatic = true;
+            var groundMat = new Material(Shader.Find("Standard"));
+            groundMat.color = new Color(0.42f, 0.62f, 0.32f); // grass green
+            ground.GetComponent<Renderer>().sharedMaterial = groundMat;
 
             // Lighting
             var sun = new GameObject("Sun");
