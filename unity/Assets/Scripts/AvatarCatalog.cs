@@ -16,7 +16,7 @@ namespace PuebloVivo
             { "innkeeper", "Mage" },        // maria (host)
             { "bartender", "Barbarian" },   // diego
             { "baker",     "Ranger" },      // lucia
-            { "farmer",    "RogueHooded" }, // carlos
+            { "farmer",    "Rogue_Hooded" }, // carlos
             { "teacher",   "Knight" },      // sofia
             { "merchant",  "Rogue" },       // pedro
             { "gardener",  "Ranger" },      // elena (7th; reuses Ranger, tinted)
