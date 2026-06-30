@@ -68,28 +68,33 @@ namespace PuebloVivo
 
         private void BuildWorld(JObject snap)
         {
-            // place locations evenly on a circle
+            // place locations evenly on a circle (idempotent: skip any already placed, so a
+            // re-sent snapshot — e.g. after a reconnect — does not duplicate markers)
             var locs = (JArray)snap["locations"];
             for (int i = 0; i < locs.Count; i++)
             {
                 string name = (string)locs[i]["name"];
+                if (_locPos.ContainsKey(name)) continue;
                 float ang = (float)i / locs.Count * Mathf.PI * 2f;
                 var pos = new Vector3(Mathf.Cos(ang) * layoutRadius, 0, Mathf.Sin(ang) * layoutRadius);
                 _locPos[name] = pos;
                 CreateMarker(name, pos);
             }
-            // spawn agents
+            // spawn agents (idempotent: reuse an avatar already in the scene — survives a
+            // VillageController re-init / snapshot resend that would otherwise duplicate them)
             var agents = (JArray)snap["agents"];
             for (int i = 0; i < agents.Count; i++)
             {
                 string id = (string)agents[i]["id"];
+                if (_agents.ContainsKey(id)) continue;
+                var existing = GameObject.Find($"Agent_{id}");
+                if (existing != null) { _agents[id] = existing.GetComponent<AgentAvatar>(); continue; }
                 string name = (string)agents[i]["name"];
                 string loc = (string)agents[i]["location"];
                 string occupation = (string)agents[i]["occupation"];
                 string model = AvatarCatalog.ModelFor(occupation);
                 Vector3 pos = LocPos(loc) + Jitter();
-                if (!_agents.ContainsKey(id))
-                    _agents[id] = AgentAvatar.Spawn(model, id, name, pos);
+                _agents[id] = AgentAvatar.Spawn(model, id, name, pos);
             }
             Log($"world built: {agents.Count} villagers, {locs.Count} locations");
         }

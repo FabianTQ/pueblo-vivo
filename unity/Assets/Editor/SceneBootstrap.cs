@@ -38,9 +38,11 @@ namespace PuebloVivo.EditorTools
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = new Color(0.55f, 0.72f, 0.85f);
+            cam.fieldOfView = 55;
             camGo.AddComponent<AudioListener>();
-            camGo.transform.position = new Vector3(0, 32, -30);
-            camGo.transform.rotation = Quaternion.Euler(48, 0, 0);
+            // Closer, slightly lower framing so the KayKit villagers read clearly.
+            camGo.transform.position = new Vector3(0, 21, -23);
+            camGo.transform.rotation = Quaternion.Euler(43, 0, 0);
 
             // Brain client
             var brainGo = new GameObject("Brain");
