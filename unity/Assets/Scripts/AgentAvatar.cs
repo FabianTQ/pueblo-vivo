@@ -47,6 +47,7 @@ namespace PuebloVivo
                 nav0.radius = 0.35f; nav0.height = 2f; nav0.speed = 3.5f;
                 nav0.angularSpeed = 720; nav0.acceleration = 12;
                 go.AddComponent<AgentAvatar>();
+                // No Animator on the capsule fallback: _anim stays null and Update()/Cheer() guard for it.
             }
             go.name = $"Agent_{id}";
 
@@ -88,6 +89,8 @@ namespace PuebloVivo
             if (_anim != null && _anim.runtimeAnimatorController != null) _anim.SetTrigger(CheerHash);
         }
 
+        // KayKit materials use a flat atlas with white "_Color", so highlight-off = white
+        // restores the original look. (If a material ever uses a tinted "_Color", revisit this.)
         public void SetHighlight(bool on) => ApplyColor(on ? Color.yellow : Color.white);
 
         private void ApplyColor(Color c)

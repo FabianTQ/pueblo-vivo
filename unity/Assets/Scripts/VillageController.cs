@@ -24,13 +24,6 @@ namespace PuebloVivo
         private readonly Dictionary<string, AgentAvatar> _agents = new();
         private readonly System.Random _rng = new(12345);
 
-        private static readonly Color[] Palette =
-        {
-            new(0.91f,0.30f,0.24f), new(0.18f,0.55f,0.34f), new(0.20f,0.40f,0.85f),
-            new(0.95f,0.61f,0.07f), new(0.61f,0.35f,0.71f), new(0.10f,0.74f,0.61f),
-            new(0.83f,0.33f,0.64f),
-        };
-
         private void Awake()
         {
             if (client == null) client = FindObjectOfType<BrainClient>();

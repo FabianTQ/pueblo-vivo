@@ -72,7 +72,11 @@ namespace PuebloVivo.EditorTools
             foreach (var f in files)
                 foreach (var o in AssetDatabase.LoadAllAssetsAtPath(f))
                     if (o is AnimationClip c && !c.name.StartsWith("__preview"))
+                    {
+                        if (dict.ContainsKey(c.name))
+                            Debug.LogWarning($"[Avatars] duplicate clip '{c.name}' across animation FBX; last one wins");
                         dict[c.name] = c;
+                    }
             return dict;
         }
 
@@ -90,7 +94,9 @@ namespace PuebloVivo.EditorTools
             ctrl.AddParameter("Cheer", AnimatorControllerParameterType.Trigger);
             var sm = ctrl.layers[0].stateMachine;
 
-            var blend = new BlendTree { name = "Locomotion", blendType = BlendTreeType.Simple1D, blendParameter = "Speed" };
+            // useAutomaticThresholds MUST be false, else Unity ignores the explicit
+            // AddChild thresholds and re-spaces them evenly (0/0.5/1), collapsing the blend.
+            var blend = new BlendTree { name = "Locomotion", blendType = BlendTreeType.Simple1D, blendParameter = "Speed", useAutomaticThresholds = false };
             AssetDatabase.AddObjectToAsset(blend, ctrl);
             AddChild(blend, clips, "Idle_A", 0f);
             AddChild(blend, clips, "Walking_A", 2f);
