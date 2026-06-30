@@ -27,6 +27,19 @@ namespace PuebloVivo
         private const float BuildingScale = 2.5f; // hex buildings ship at miniature scale
         private bool _decorated;
 
+        // Hand-placed medieval town layout (x,z) for the named hubs — an organic cluster,
+        // NOT a ring. Homes & unknowns scatter deterministically around it (see PositionForLocation).
+        private static readonly Dictionary<string, Vector2> Layout = new()
+        {
+            { "plaza",  new Vector2(0f, 0f) },
+            { "well",   new Vector2(3.5f, -3f) },
+            { "tavern", new Vector2(-9f, 4f) },
+            { "market", new Vector2(8f, 6f) },
+            { "bakery", new Vector2(11f, -4f) },
+            { "school", new Vector2(-8f, -8f) },
+            { "garden", new Vector2(-3f, 12f) },
+        };
+
         private void Awake()
         {
             if (client == null) client = FindObjectOfType<BrainClient>();
@@ -78,8 +91,7 @@ namespace PuebloVivo
             {
                 string name = (string)locs[i]["name"];
                 if (_locPos.ContainsKey(name)) continue;
-                float ang = (float)i / locs.Count * Mathf.PI * 2f;
-                var pos = new Vector3(Mathf.Cos(ang) * layoutRadius, 0, Mathf.Sin(ang) * layoutRadius);
+                var pos = PositionForLocation(name);
                 _locPos[name] = pos;
                 CreateMarker(name, pos);
             }
@@ -99,7 +111,7 @@ namespace PuebloVivo
                 Vector3 pos = LocPos(loc) + Jitter();
                 _agents[id] = AgentAvatar.Spawn(model, id, name, pos);
             }
-            if (!_decorated) { EnvironmentDecorator.Decorate(transform, layoutRadius); _decorated = true; }
+            if (!_decorated) { EnvironmentDecorator.Decorate(transform, new List<Vector3>(_locPos.Values)); _decorated = true; }
             Log($"world built: {agents.Count} villagers, {locs.Count} locations");
         }
 
@@ -127,6 +139,18 @@ namespace PuebloVivo
 
         private Vector3 Jitter() =>
             new((float)(_rng.NextDouble() - 0.5) * 3f, 0, (float)(_rng.NextDouble() - 0.5) * 3f);
+
+        private Vector3 PositionForLocation(string name)
+        {
+            if (Layout.TryGetValue(name, out var p)) return new Vector3(p.x, 0, p.y);
+            // homes & unknowns: deterministic scatter in a residential band (not a ring)
+            int h = 17;
+            foreach (char c in name) h = h * 31 + c;
+            var r = new System.Random(h);
+            double ang = r.NextDouble() * System.Math.PI * 2;
+            double rad = 13 + r.NextDouble() * 11; // 13..24, varied -> organic
+            return new Vector3((float)(System.Math.Cos(ang) * rad), 0, (float)(System.Math.Sin(ang) * rad));
+        }
 
         private void CreateMarker(string name, Vector3 pos)
         {
@@ -156,8 +180,7 @@ namespace PuebloVivo
                 building.GetComponent<Renderer>().material.color = new Color(0.6f, 0.6f, 0.62f);
                 Destroy(building.GetComponent<Collider>());
             }
-            var label = SpeechBubble.Attach(holder, model != null ? 4.5f : 1.5f);
-            label.Show(name, float.MaxValue);
+            // no name label — the buildings speak for themselves (medieval town look)
         }
 
         private void Log(string msg) => OnLog?.Invoke(msg);
