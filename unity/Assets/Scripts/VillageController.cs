@@ -59,7 +59,11 @@ namespace PuebloVivo
                 case "gossip": OnGossip?.Invoke((string)ev["src"], (string)ev["dst"]);
                     Log($"gossip: {(string)ev["src"]} -> {(string)ev["dst"]}"); break;
                 case "mind_dump": OnMind?.Invoke(ev); break;
-                case "talk_start": Log($"talk: {(string)ev["a"]} <-> {(string)ev["b"]}"); break;
+                case "talk_start":
+                    Log($"talk: {(string)ev["a"]} <-> {(string)ev["b"]}");
+                    if (_agents.TryGetValue((string)ev["a"], out var a1)) a1.Cheer();
+                    if (_agents.TryGetValue((string)ev["b"], out var a2)) a2.Cheer();
+                    break;
                 case "plan": Log($"{(string)ev["agent"]} planned {(int)ev["steps"]} steps"); break;
                 case "reflect": Log($"{(string)ev["agent"]} reflected"); break;
                 case "seed": Log($"SEED: {(string)ev["text"]}"); break;
@@ -88,9 +92,11 @@ namespace PuebloVivo
                 string id = (string)agents[i]["id"];
                 string name = (string)agents[i]["name"];
                 string loc = (string)agents[i]["location"];
+                string occupation = (string)agents[i]["occupation"];
+                string model = AvatarCatalog.ModelFor(occupation);
                 Vector3 pos = LocPos(loc) + Jitter();
                 if (!_agents.ContainsKey(id))
-                    _agents[id] = AgentAvatar.Spawn(id, name, pos, Palette[i % Palette.Length]);
+                    _agents[id] = AgentAvatar.Spawn(model, id, name, pos);
             }
             Log($"world built: {agents.Count} villagers, {locs.Count} locations");
         }
