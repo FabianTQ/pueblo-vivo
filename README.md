@@ -124,3 +124,6 @@ Unity 6.
 
 Character art: **KayKit "Adventurers"** by Kay Lousberg
 ([CC0 1.0](https://kaylousberg.itch.io/kaykit-adventurers)).
+
+Environment art: **KayKit "Medieval Hexagon Pack"** by Kay Lousberg
+([CC0 1.0](https://kaylousberg.itch.io/kaykit-medieval-hexagon)).
